@@ -11756,13 +11756,13 @@ module.exports = str => encodeURIComponent(str).replace(/[!'()*]/g, x => `%${x.c
 "use strict";
 
 var token = '%[a-f0-9]{2}';
-var singleMatcher = new RegExp('(' + token + ')|([^%]+?)', 'gi');
+var singleMatcher = new RegExp(token, 'gi');
 var multiMatcher = new RegExp('(' + token + ')+', 'gi');
 
 function decodeComponents(components, split) {
 	try {
 		// Try to decode the entire string first
-		return [decodeURIComponent(components.join(''))];
+		return decodeURIComponent(components.join(''));
 	} catch (err) {
 		// Do nothing
 	}
@@ -11784,12 +11784,12 @@ function decode(input) {
 	try {
 		return decodeURIComponent(input);
 	} catch (err) {
-		var tokens = input.match(singleMatcher) || [];
+		var tokens = input.match(singleMatcher);
 
 		for (var i = 1; i < tokens.length; i++) {
 			input = decodeComponents(tokens, i).join('');
 
-			tokens = input.match(singleMatcher) || [];
+			tokens = input.match(singleMatcher);
 		}
 
 		return input;
@@ -13944,7 +13944,8 @@ var DataTableContainer_DataTableContainer = function DataTableContainer(_ref) {
     page: filters.page ? filters.page : 1,
     max_per_page: filters.max_per_page ? filters.max_per_page : 10,
     cursor: filters.cursor ? filters.cursor : 0,
-    limit: filters.limit ? filters.limit : 10
+    limit: filters.limit ? filters.limit : 10,
+    tags: filters.tags ? filters.tags : ""
   }),
       query = _useState2[0],
       setQuery = _useState2[1];
