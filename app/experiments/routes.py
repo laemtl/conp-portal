@@ -7,7 +7,7 @@ from flask import (
     url_for,
     send_from_directory,
     session,
-    make_response, 
+    make_response,
     Response,
     abort,
     send_file,
@@ -103,9 +103,7 @@ def download(experiment_id):
     db.session.commit()
 
     # Télécharger le fichier ZIP
-    return send_file(experiment_zip_path, as_attachment=True, attachment_filename=os.path.basename(experiment_zip_path))
-
-    # return send_file(memory_file, mimetype='application/zip', as_attachment=True, attachment_filename='experiment.zip')
+    return send_file(experiment_zip_path, as_attachment=True, download_name=os.path.basename(experiment_zip_path))
 
 @experiments_bp.route("/view/<int:experiment_id>")
 def view(experiment_id):
